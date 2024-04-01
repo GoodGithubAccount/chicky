@@ -100,7 +100,7 @@ function module:MakeBots(Server, numBots)
 			command.x = 0
 			command.y = 0
 			command.z = 0
-			command.serverTime = tick()
+			command.serverTime = Server.serverSimulationTime
 			command.deltaTime = deltaTime
 			
 			 
