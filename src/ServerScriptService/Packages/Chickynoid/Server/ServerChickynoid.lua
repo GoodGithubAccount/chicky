@@ -136,8 +136,7 @@ function ServerChickynoid:GenerateFakeCommand(server, deltaTime)
 	local event = {}
 	event.t = EventType.Command
 	event.command = command
-	self:HandleClientUnreliableEvent(server, event, true)
-	
+	self:HandleClientUnreliableEvent(server, event, true)	
 	
 	self.debug.fakeCommandsThisSecond += 1
 end
@@ -287,6 +286,8 @@ function ServerChickynoid:ProcessCommand(server, command, fakeCommand, resent)
 		if command.serverTime == nil or typeof(command.serverTime) ~= "number" 	or command.serverTime ~= command.serverTime then
 			return
 		end
+
+		command.serverTime = math.clamp(command.serverTime, 0, server.serverSimulationTime)
 
 		if command.playerStateFrame == nil or typeof(command.playerStateFrame) ~= "number" or command.playerStateFrame ~= command.playerStateFrame then
 			return				
